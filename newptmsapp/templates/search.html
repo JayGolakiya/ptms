@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Search Bus </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.css'%}">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+</head>
+<body>
+    <h1 style="margin-top: 3%; font-size: 30px !important">Public Transport Management System</h1>
+    <a href="/home/" class="w3-button w3-green" style="margin-left: 80%; background: #3cb371;">Home</a>
+    <div style="margin-top: 3% !important; width: 600px;" class=" w3l-login-form">
+        <form action="/searchbus/" method="POST">{% csrf_token %}
+            <div class=" w3l-form-group w3-left">
+                <label>Source:</label>
+                <div class="group">
+                    <i class="fas fa-road"></i>
+                    <input type="text" name="source" class="form-control" placeholder="Source" required="required" />
+                </div>
+            </div>
+            <div class=" w3l-form-group w3-right">
+                <label>Destination:</label>
+                <div class="group">
+                    <i class="fas fa-road"></i>
+                    <input type="text" name="destination" class="form-control" placeholder="Destination" required="required" />
+                </div>
+            </div>
+            <button type="submit" name="submit">Search Bus</button>
+            <p style="color:white;">
+            </p>
+        </form>
+    </div>
+        {% if message %}
+                <h3 style="color: red; font-family: verdana;">{{message}}</h3> 
+        {% endif %}
+        {% if routes_with_bus %}
+        <table width="50%" style="font-size: 20px; max-width: 40%; color: white; margin: 2% 30% " class="w3-table w3-white w3-bordered">
+        <tr style="text-align: center;"><th>   </th><th>Bus_ID</th><th>Route_ID</th><th>Departed_time</th></tr>
+        {% for i in routes_with_bus %}
+            <tr>
+            {% for j in i %}
+                {% if forloop.counter == 1 %}
+                <td><a class="w3-button w3-green" href="http://127.0.0.1:8000/fare/?busid={{j}}&Date={{date}}">Select</a></td>
+                {%endif%}
+                <td>{{j}}</td>
+            {% endfor %}
+            </tr>    
+        {% endfor %}
+        {% endif %}
+    </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

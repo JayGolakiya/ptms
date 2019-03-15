@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Face Detect</title>
+    <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.css'%}">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+
+
+<body>
+    <h1 style="margin-top: 3%; font-size: 30px !important">Public Transport Management System</h1>
+    <a href="/home/" class="w3-button" style="margin-left: 80%; background: #3cb371;">Home</a>
+    <div style="margin-top: 3% !important; width: 450px;" class=" w3l-login-form">
+        <form action="/face_detection/" method="POST">{% csrf_token %}
+            <div class=" w3l-form-group">
+                <label>Enter Url of Image:</label>
+                <div class="group">
+                    <i class="fas fa-image"></i>
+                    <input type="text" name="iname" class="form-control" placeholder="Url" 
+                    required="required" />
+                </div>
+            </div>
+            <button type="submit">Scan</button>
+        </form>
+    </div>
+    {% if count %}
+        <h2 class="w3-text-white">Appx. No. of passengers in the bus is : {{count}}</h2>
+    {%endif%}
+</body>
+
+</html>

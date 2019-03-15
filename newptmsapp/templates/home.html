@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Home </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.css'%}">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+</head>
+<body>
+    <h1 style="margin-top: 3%; font-size: 30px !important">Public Transport Management System</h1>
+    <hr>
+    {% if id %}
+    <h3 style="color: white; text-align: center;">Contoller Id :<span style="font-weight:bold;"> {{id}} </span></h3>
+        <h3 style="color: white; text-align: center;">Contoller City : <span style="font-weight:bold;"> {{city}} </span></h3>
+    {% endif %}
+    <div style="margin-top: 3% !important; width: 600px;" class=" w3l-login-form">
+       <a href="/searchbus/"><button>Search Bus</button></a>
+       <br>
+       <a href="/newbus/"><button>Add Bus</button></a>
+       <br>
+       <a href="/newconductor/"><button>Add Conductor</button></a>
+       <br>
+       <a href="/addroute/"><button>Add Route</button></a>
+       <br>
+       <a href="/detect_face/"><button>Detect passengers</button></a>
+       <br>
+       <a href="/logout/"><button>Logout</button></a>          
+    </div>
+       
+</body>
+
+</html>

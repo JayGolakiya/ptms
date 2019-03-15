@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>conductor details Form </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.css'%}">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+</head>
+<body>
+    <h1 style="margin-top: 3%; font-size: 30px !important">Public Transport Management System</h1>
+    <a href="/home/" class="w3-button" style="margin-left: 80%;background: #3cb371;">Home</a>
+    <div style="margin-top: 3% !important; width: 600px;" class=" w3l-login-form">
+        <h1>Conductor Details</h1>
+        {% if message %}
+                <h3 style="color: red; font-family: verdana;">{{message}}</h3> 
+        {% endif %}
+        <form action="/add_conductor/" method="POST">{% csrf_token %}
+            <div class=" w3l-form-group w3-left">
+                <label>Conductor Id:</label>
+                <div class="group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="cid" class="form-control" placeholder="Conductor Id" required="required" />
+                </div>
+                <br>
+                <label>Password:</label>
+                <div class="group">
+                    <i class="fas fa-unlock"></i>
+                    <input type="password" minlength="6" name="passwd" class="form-control" placeholder="Password" required="required" />
+                </div>
+                <br>
+                <label>Confirm Password:</label>
+                <div class="group">
+                    <i class="fas fa-unlock"></i>
+                    <input type="password" minlength="6" name="cpasswd" class="form-control" placeholder="Confirm Password" required="required" />
+                </div>
+                <br>
+                <label>Conductor Name:</label>
+                <div class="group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="cname" class="form-control" placeholder="Conductor Name" required="required" />
+                </div>
+                
+            </div>
+            <div class=" w3l-form-group w3-right">
+                <label>Email:</label>
+                <div class="group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" style="border: hidden;" class="form-control" placeholder="Conductor Email" required="required" />
+                </div>
+                <br>
+                <label>Contact No:</label>
+                <div class="group">
+                    <i class="fas fa-mobile"></i>
+                    <input type="number" name="cno" style="border: hidden; width:100%;" class="form-control" placeholder="Contact No" required="required" />
+                </div>
+                <br>
+                <label>Address:</label>
+                <div class="group">
+                    <i class="fas fa-home"></i>
+                    <textarea name="address" style="border: hidden;" class="form-control" placeholder="Address" required="required"> </textarea>
+                </div>
+            </div>
+            <br>
+            <button type="submit" name="Register">Register</button>
+        </form>
+    </div>
+    <footer>
+        <p class="copyright-agileinfo"> &copy; 2019 Public transportaition system. All Rights Reserved.</a></p>
+    </footer>
+
+</body>
+
+</html>

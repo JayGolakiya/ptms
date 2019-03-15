@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Fare_Collection </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css'%}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.css'%}">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 style="margin-top: 3%; font-size: 30px !important; ">Public Transport Management System</h1>
+    <a href="/home/" class="w3-button " style="margin-left: 80%; background:#3cb371;">Home</a>
+     <form action="/fare/" method="GET">
+    <div style="margin-top: 3% !important; width: 600px;" class=" w3l-login-form">
+    <div class=" w3l-form-group w3-left">
+                <label>Bus_Id:</label>
+                <div class="group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="busid" class="form-control" placeholder="Bus_ID"/>
+                </div>
+    </div>
+    <div class=" w3l-form-group w3-right">
+                <label>Date:</label>
+                <div class="group">
+                    <i class="fas fa-clock"></i>
+                    <input type="date" style="border: none;" name="Date" class="form-control" placeholder="Date"/>
+                </div>
+    </div>
+    <button type="submit">Search</button>
+    </div> 
+    </form>
+    <br>
+    {% if lat%}
+    <div style="text-align: center; font-size:20px;"><a class="w3-green w3-large w3-button" target="_blank" href="http://maps.google.com/?q={{lat}},{{longi}}">Get Location</a></div>
+    {% endif %}
+    <br>
+    {% if message %}
+                <h3 style="color:white;  text-align: center; font-family: verdana;">{{message}}</h3> 
+    {% endif %}
+    {% if data %}
+    {% for i in data %}
+    <table style="width: 800px;" class="w3l-login-form">
+    <tr><td>
+        {% for j in i %}
+        {% if forloop.counter == 1 %}
+        <h3 style="color: white; text-align: center;">Conductor ID : {{j}}</h3>
+        {% endif %}
+        {% if forloop.counter == 2 %}
+        <table style="font-size: 16px; max-width: 100%; color: white;" class="w3-table w3-center w3-white w3-bordered"><tr><th>Source</th><th>Destination</th><th>Date</th><th>No_Of_tickets</th><th>Fare</th></tr> 
+            {% for k in j %}        
+            <tr>
+            {% for key,value in k.items %}
+                    <td>{{value}}</td>
+            {% endfor %}            
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if forloop.counter == 3 %}
+                <h3 style="color: white; text-align: center;">Total Fare to take: {{j}} Rupees</h3>
+        {% endif %}
+    {% endfor %}
+        <form action="/UpdateFareStatus/" method="post">{% csrf_token %}
+        {% for j in i %}
+            {% if forloop.counter == 1 %}
+                <input type="hidden" name="conducter_id" value="{{j}}">
+            {% endif %}
+        {% endfor %}
+            {% for key,value in request.GET.items %}
+                <input type="hidden" name="{{key}}" value="{{value}}">
+            {%endfor%}
+            <div style="text-align: center;"><input type="submit" value="Fare Collected" class="w3-button w3-green" name="Fare Collected "></div>
+        </form>
+    </td>
+</tr>
+    </table>
+    {%endfor%}
+    {%endif%}  
+</body>
+
+</html>

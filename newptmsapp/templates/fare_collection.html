@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Fare_Collection </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.css'%}">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+
+<body>
+<h1 style="margin-top: 3%; font-size: 30px !important; ">Public Transport Management System</h1>
+    <br>
+    <br>
+    <?php
+                
+                   echo('<table width="70%" style="font-size: 20px; color: white; text-align:center;" class="w3-table w3-bordered">');
+                   echo('<tr><th>Bus_ID</th><th>Source</th><th>Destination</th><th>Tickets</th></tr>');            
+                    while( $row=mysqli_fetch_array($result) )
+                    {
+                        echo('<tr><td>'.$row['Bus_ID'].'</td><td>'.$row['Source'].'</td><td>'.$row['Destination'].'</td><td>'.$row['Tickets'].'</td></tr>');
+                    }
+                
+            ?>
+        </table>
+
+</body>
+
+</html>
